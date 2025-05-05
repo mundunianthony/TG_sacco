@@ -14,7 +14,7 @@ interface CustomInput {
   label: string,
   placeholder: string
 }
-
+//Custom input
 const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
   return (
     <FormField
@@ -31,7 +31,6 @@ const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
                 placeholder={placeholder}
                 className="input-class"
                 type={name === 'password' ? 'password' : 'text'}
-                value={field.value ?? ""} // Ensure value is never undefined
                 {...field}
               />
             </FormControl>
