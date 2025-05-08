@@ -1,36 +1,44 @@
-import React from 'react'
-import { FormControl, FormField, FormLabel, FormMessage } from './ui/form'
-import { Input } from './ui/input'
+import React from "react";
+import { FormControl, FormField, FormLabel, FormMessage } from "./ui/form";
+import { Input } from "./ui/input";
 
-import { Control, FieldPath } from 'react-hook-form'
-import { z } from 'zod'
-import { authFormSchema } from '@/lib/utils'
+import { Control, FieldPath } from "react-hook-form";
+import { z } from "zod";
+import { authFormSchema } from "@/lib/utils";
 
-const formSchema = authFormSchema('sign-up')
+const formSchema = authFormSchema("sign-up");
 
 interface CustomInput {
-  control: Control<z.infer<typeof formSchema>>,
-  name: FieldPath<z.infer<typeof formSchema>>,
-  label: string,
-  placeholder: string
+  control: Control<z.infer<typeof formSchema>>;
+  name: FieldPath<z.infer<typeof formSchema>>;
+  label: string;
+  placeholder: string;
+  id: string; // Add id prop
 }
 //Custom input
-const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
+const CustomInput = ({
+  control,
+  name,
+  label,
+  placeholder,
+  id,
+}: CustomInput) => {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
         <div className="form-item">
-          <FormLabel className="form-label">
+          <FormLabel className="form-label" htmlFor={id}>
             {label}
           </FormLabel>
           <div className="flex w-full flex-col">
             <FormControl>
-              <Input 
+              <Input
+                id={id} // Use the id prop
                 placeholder={placeholder}
                 className="input-class"
-                type={name === 'password' ? 'password' : 'text'}
+                type={name === "password" ? "password" : "text"}
                 {...field}
               />
             </FormControl>
@@ -39,7 +47,7 @@ const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
         </div>
       )}
     />
-  )
-}
+  );
+};
 
-export default CustomInput
+export default CustomInput;
